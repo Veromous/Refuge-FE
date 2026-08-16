@@ -13,7 +13,9 @@ dist-ssr
 *.local
 
 .env
-.env.example
+.env.local
+.env.*.local
+# NOTE: .env.example is intentionally NOT ignored — it's the shareable template.
 
 # Editor directories and files
 .vscode/*
