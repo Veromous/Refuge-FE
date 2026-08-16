@@ -4,8 +4,10 @@ import Home from './pages/Home'
 import About from './pages/About'
 import WhatWeDo from './pages/WhatWeDo'
 import Donate from './pages/Donate'
+import DonateStatus from './pages/DonateStatus'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
+import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -16,8 +18,10 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="what-we-do" element={<WhatWeDo />} />
         <Route path="donate" element={<Donate />} />
+        <Route path="donate/status" element={<DonateStatus />} />
         <Route path="contact" element={<Contact />} />
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

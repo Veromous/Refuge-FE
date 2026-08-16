@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import { NavLink, Link, useLocation } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom'
+import { Menu, X, LogOut, ChevronDown } from 'lucide-react'
 import Logo from './Logo'
 import { navLinks } from '../data/content'
+import { useAuth } from '../context/AuthContext'
 
 // Fixed top navigation. On the home page it starts transparent over the hero
 // image (white text) and turns solid white once the user scrolls. On every
@@ -12,6 +13,36 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
   const isHome = pathname === '/'
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  const firstName = user?.name?.split(' ')[0] || user?.email
+
+  // Close the account dropdown when clicking outside it.
+  useEffect(() => {
+    if (!menuOpen) return
+    function onClick(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', onClick)
+    return () => document.removeEventListener('mousedown', onClick)
+  }, [menuOpen])
+
+  // Close menus on navigation.
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [pathname])
+
+  function handleSignOut() {
+    logout()
+    setOpen(false)
+    setMenuOpen(false)
+    navigate('/')
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -55,10 +86,43 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <Link to="/login" className={signInClass}>
-            Sign in
-          </Link>
+        <div className="hidden items-center gap-4 md:flex">
+          {user ? (
+            <div className="relative" ref={menuRef}>
+              <button
+                type="button"
+                onClick={() => setMenuOpen((v) => !v)}
+                aria-haspopup="menu"
+                aria-expanded={menuOpen}
+                className={`inline-flex items-center gap-1 ${signInClass}`}
+              >
+                {firstName}
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${menuOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              {menuOpen && (
+                <div
+                  role="menu"
+                  className="absolute right-0 top-full mt-3 w-44 overflow-hidden rounded-xl border border-slate-100 bg-white py-1 shadow-lg"
+                >
+                  <button
+                    type="button"
+                    role="menuitem"
+                    onClick={handleSignOut}
+                    className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sign out
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link to="/login" className={signInClass}>
+              Sign in
+            </Link>
+          )}
           <Link
             to="/donate"
             className="rounded-full bg-warm-500 px-6 py-2.5 text-base font-semibold text-white shadow-sm transition hover:bg-warm-600"
@@ -95,14 +159,28 @@ export default function Navbar() {
                 {l.label}
               </NavLink>
             ))}
+            {user && (
+              <span className="text-sm font-semibold text-slate-800">{firstName}</span>
+            )}
             <div className="mt-2 flex items-center gap-3">
-              <Link
-                to="/login"
-                onClick={() => setOpen(false)}
-                className="text-sm font-medium text-slate-600 hover:text-hope-700"
-              >
-                Sign in
-              </Link>
+              {user ? (
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-hope-700"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sign out
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="text-sm font-medium text-slate-600 hover:text-hope-700"
+                >
+                  Sign in
+                </Link>
+              )}
               <Link
                 to="/donate"
                 onClick={() => setOpen(false)}

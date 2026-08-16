@@ -5,10 +5,11 @@ import PageHeader from '../components/PageHeader'
 import GoogleButton from '../components/GoogleButton'
 import { useAuth } from '../context/AuthContext'
 
-export default function Login() {
-  const { login } = useAuth()
+export default function Register() {
+  const { register } = useAuth()
   const navigate = useNavigate()
 
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -17,23 +18,38 @@ export default function Login() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
+
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters long.')
+      return
+    }
+
     setLoading(true)
     try {
-      await login(email.trim(), password)
+      await register(name.trim(), email.trim(), password)
       navigate('/')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Could not sign you in.')
+      setError(err instanceof Error ? err.message : 'Could not create your account.')
       setLoading(false)
     }
   }
 
   return (
     <>
-      <PageHeader eyebrow="Welcome back" title="Sign in" />
+      <PageHeader eyebrow="Join us" title="Create an account" />
 
       <section className="mx-auto max-w-md px-6 py-16">
         <div className="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm">
           <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Full name"
+              autoComplete="name"
+              required
+              className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-hope-500"
+            />
             <input
               type="email"
               value={email}
@@ -47,8 +63,8 @@ export default function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              autoComplete="current-password"
+              placeholder="Password (at least 8 characters)"
+              autoComplete="new-password"
               required
               className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-hope-500"
             />
@@ -66,7 +82,7 @@ export default function Login() {
               className="flex w-full items-center justify-center gap-2 rounded-full bg-hope-600 px-8 py-3 font-semibold text-white shadow-sm transition hover:bg-hope-700 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {loading && <Loader2 className="h-5 w-5 animate-spin" />}
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? 'Creating account...' : 'Create account'}
             </button>
           </form>
 
@@ -77,15 +93,15 @@ export default function Login() {
           </div>
 
           <GoogleButton
-            label="Continue with Google"
+            label="Sign up with Google"
             onSuccess={() => navigate('/')}
             onError={(message) => setError(message)}
           />
 
           <p className="mt-6 text-center text-sm text-slate-500">
-            New here?{' '}
-            <Link to="/register" className="font-semibold text-hope-700 hover:underline">
-              Create an account
+            Already have an account?{' '}
+            <Link to="/login" className="font-semibold text-hope-700 hover:underline">
+              Sign in
             </Link>
           </p>
         </div>
