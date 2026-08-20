@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { CheckCircle2, Clock, XCircle, Loader2 } from 'lucide-react'
 import { api } from '../lib/api'
+import { causes } from '../data/causes'
+import type { CauseId } from '../data/causes'
 
 interface Donation {
   reference: string
@@ -9,9 +11,14 @@ interface Donation {
   amount: number
   currency: string
   status: 'PENDING' | 'SUCCESSFUL' | 'FAILED'
+  cause: CauseId
   donorName: string
   message: string | null
   createdAt: string
+}
+
+function causeLabel(id: CauseId): string {
+  return causes.find((c) => c.id === id)?.label ?? ''
 }
 
 interface VerifyResponse {
@@ -77,7 +84,7 @@ export default function DonateStatus() {
           <Result
             icon={<CheckCircle2 className="h-12 w-12 text-hope-600" />}
             title="Thank you for your gift"
-            body={`Your donation of ${donation.amount.toLocaleString()} ${donation.currency} was received. You are now someone’s refuge.`}
+            body={`Your donation of ${donation.amount.toLocaleString()} ${donation.currency} toward ${causeLabel(donation.cause)} was received. You are now someone’s refuge.`}
           />
         )}
 
@@ -100,13 +107,13 @@ export default function DonateStatus() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             to="/donate"
-            className="rounded-full bg-warm-500 px-6 py-2.5 font-semibold text-white transition hover:bg-warm-600"
+            className="rounded-full bg-warm-500 px-6 py-2.5 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg"
           >
             Back to donate
           </Link>
           <Link
             to="/"
-            className="rounded-full border border-slate-200 px-6 py-2.5 font-semibold text-slate-700 transition hover:border-hope-500 hover:text-hope-700"
+            className="rounded-full border border-slate-200 px-6 py-2.5 font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-hope-500 hover:text-hope-700"
           >
             Return home
           </Link>

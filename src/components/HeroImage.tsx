@@ -15,7 +15,7 @@ export default function HeroImage({ cover = false }: { cover?: boolean }) {
       <img
         src="/hero.jpg"
         alt="Children supported by Refuge of Hope with books and food"
-        className="absolute inset-0 h-full w-full object-cover object-[center_top]"
+        className="absolute inset-0 h-full w-full object-cover object-center"
         onError={() => setImgOk(false)}
       />
     ) : (

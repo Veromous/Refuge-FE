@@ -30,7 +30,7 @@ export default function GoogleButton({ label, onSuccess, onError }: GoogleButton
     <button
       type="button"
       onClick={() => start()}
-      className="flex w-full items-center justify-center gap-3 rounded-full border border-slate-200 px-8 py-3 font-medium text-slate-700 transition hover:bg-slate-50"
+      className="flex w-full items-center justify-center gap-3 rounded-full border border-slate-200 px-8 py-3 font-medium text-slate-700 transition hover:-translate-y-0.5 hover:bg-slate-50 hover:shadow-md"
     >
       <FcGoogle className="h-5 w-5" />
       {label}

@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
 import { objectives, focusAreas } from '../data/content'
+import { causes } from '../data/causes'
+
+const gospelCauses = causes.filter((c) => c.id !== 'GENERAL')
 
 export default function WhatWeDo() {
   return (
@@ -55,6 +58,46 @@ export default function WhatWeDo() {
         </div>
       </section>
 
+      {/* Gospel & church support */}
+      <section className="mx-auto max-w-5xl px-6 py-16">
+        <div className="text-center">
+          <span className="inline-block rounded-full bg-hope-100 px-4 py-1 text-sm font-medium text-hope-700">
+            Faith in action
+          </span>
+          <h2 className="mt-4 text-2xl font-bold text-slate-900">Spreading the Gospel</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+            Beyond meeting physical needs, we carry hope to the soul. Your giving can go
+            further than a meal: it can reach a heart, and hold up the hands of those who
+            preach.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {gospelCauses.map((c) => (
+            <div
+              key={c.id}
+              className="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm"
+            >
+              <div className="grid h-12 w-12 place-items-center rounded-xl bg-hope-100">
+                <c.Icon className="h-6 w-6 text-hope-700" strokeWidth={1.75} />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-slate-900">{c.label}</h3>
+              <p className="mt-2 text-slate-600">{c.description}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mx-auto mt-8 max-w-2xl text-center italic text-slate-500">
+          “Freely you have received; freely give.” (Matthew 10:8)
+        </p>
+        <div className="mt-8 text-center">
+          <Link
+            to="/donate"
+            className="inline-block rounded-full bg-hope-700 px-8 py-3 text-base font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-hope-800 hover:shadow-lg"
+          >
+            Give toward the Gospel
+          </Link>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="mx-auto max-w-4xl px-6 py-16 text-center">
         <h2 className="text-2xl font-bold text-slate-900">Help us do more</h2>
@@ -64,7 +107,7 @@ export default function WhatWeDo() {
         </p>
         <Link
           to="/donate"
-          className="mt-8 inline-block rounded-full bg-warm-500 px-8 py-3 text-base font-semibold text-white shadow-md transition hover:bg-warm-600"
+          className="mt-8 inline-block rounded-full bg-warm-500 px-8 py-3 text-base font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg"
         >
           Support our work
         </Link>

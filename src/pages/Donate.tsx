@@ -4,6 +4,8 @@ import PageHeader from '../components/PageHeader'
 import CopyField from '../components/CopyField'
 import { api } from '../lib/api'
 import { cryptoAddresses, mobileMoney, givingIsPlaceholder } from '../data/giving'
+import { causes, defaultCauseId } from '../data/causes'
+import type { CauseId } from '../data/causes'
 
 const presets = [2000, 5000, 10000, 25000]
 
@@ -15,6 +17,7 @@ interface InitializeResponse {
 
 export default function Donate() {
   const [amount, setAmount] = useState<number | ''>(5000)
+  const [cause, setCause] = useState<CauseId>(defaultCauseId)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
@@ -38,6 +41,7 @@ export default function Donate() {
     try {
       const res = await api.post<InitializeResponse>('/donations', {
         amount,
+        cause,
         name: name.trim(),
         email: email.trim(),
         message: message.trim() || undefined,
@@ -65,7 +69,48 @@ export default function Donate() {
           onSubmit={handleSubmit}
           className="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm"
         >
-          <h2 className="text-xl font-semibold text-slate-900">Choose an amount (XAF)</h2>
+          <h2 className="text-xl font-semibold text-slate-900">Direct your gift</h2>
+          <p className="mt-1 text-sm text-slate-500">
+            Choose the work you would like your donation to support.
+          </p>
+          <div className="mt-5 grid gap-3">
+            {causes.map((c) => {
+              const active = cause === c.id
+              return (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => setCause(c.id)}
+                  aria-pressed={active}
+                  className={`flex items-start gap-4 rounded-xl border p-4 text-left transition ${
+                    active
+                      ? 'border-hope-500 bg-hope-50'
+                      : 'border-slate-200 hover:border-hope-500'
+                  }`}
+                >
+                  <span
+                    className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg ${
+                      active ? 'bg-hope-500 text-white' : 'bg-hope-100 text-hope-700'
+                    }`}
+                  >
+                    <c.Icon className="h-5 w-5" strokeWidth={1.75} />
+                  </span>
+                  <span>
+                    <span
+                      className={`block font-semibold ${
+                        active ? 'text-hope-700' : 'text-slate-900'
+                      }`}
+                    >
+                      {c.label}
+                    </span>
+                    <span className="mt-0.5 block text-sm text-slate-600">{c.short}</span>
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+
+          <h2 className="mt-8 text-xl font-semibold text-slate-900">Choose an amount (XAF)</h2>
           <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {presets.map((preset) => {
               const active = amount === preset
@@ -138,7 +183,7 @@ export default function Donate() {
           <button
             type="submit"
             disabled={loading}
-            className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-warm-500 px-8 py-3 font-semibold text-white shadow-md transition hover:bg-warm-600 disabled:cursor-not-allowed disabled:opacity-70"
+            className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-warm-500 px-8 py-3 font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:shadow-none"
           >
             {loading && <Loader2 className="h-5 w-5 animate-spin" />}
             {loading ? 'Redirecting to secure checkout...' : 'Donate with Mobile Money'}

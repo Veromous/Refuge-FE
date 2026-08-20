@@ -1,7 +1,7 @@
 // Shared site content for Refuge of Hope Association.
 // Copy is drawn from the association's founding documents (objectives,
 // Dorcas inspiration, Douala/Wouri location). Refine the wording freely.
-import { Users, HeartHandshake, GraduationCap, Leaf, Scale } from 'lucide-react'
+import { Users, HeartHandshake, GraduationCap, Leaf, Scale, Cross } from 'lucide-react'
 
 export const navLinks = [
   { to: '/', label: 'Home' },
@@ -20,6 +20,11 @@ export const objectives = [
     title: 'Help for the Needy',
     Icon: HeartHandshake,
     text: 'We assist needy and underprivileged persons in our communities across three vital domains: education, agriculture and health.',
+  },
+  {
+    title: 'Evangelism & Soul Winning',
+    Icon: Cross,
+    text: 'We carry the Good News to those who have never heard it, and we stand with growing churches and upcoming servants of Christ who have laid down everything for the Gospel.',
   },
   {
     title: 'Livelihood Workshops',
@@ -65,6 +70,8 @@ export const leadership = [
 export const org = {
   name: 'Refuge of Hope Association',
   tagline: 'Restoring hope and dignity to the vulnerable.',
+  slogan: 'A disciple of Christ abounding in good deeds and acts of charity',
+  sloganVerse: 'Acts 9:36',
   location: 'Bonanjo, Douala, Wouri Division, Cameroon',
   foundedYear: 2021,
   jurisdiction: 'Wouri Division and beyond',
