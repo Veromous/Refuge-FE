@@ -1,5 +1,13 @@
 // Thin wrapper around fetch for talking to the backend API.
-// In dev, Vite proxies /api to the Express server (see vite.config.ts).
+//
+// In development, VITE_API_URL is unset, so requests go to a relative /api path
+// and Vite proxies them to the local Express server (see vite.config.ts).
+//
+// In production, the frontend (Cloudflare) and backend (Back4App/Hostinger) are
+// on different origins, so set VITE_API_URL to the backend origin, e.g.
+//   VITE_API_URL=https://refugebe-b2uf10m7.b4a.run
+// Requests then go to `${VITE_API_URL}/api/...`. Any trailing slash is trimmed.
+const API_BASE = (import.meta.env.VITE_API_URL ?? '').replace(/\/$/, '')
 
 export interface ApiError extends Error {
   status?: number
@@ -11,7 +19,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   // account; guests simply send no token.
   const token = localStorage.getItem('token')
 
-  const res = await fetch(`/api${path}`, {
+  const res = await fetch(`${API_BASE}/api${path}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
