@@ -8,6 +8,8 @@ import Footer from './Footer'
 export default function Layout() {
   const { pathname, hash } = useLocation()
   const isHome = pathname === '/'
+  // Auth pages are kept minimal: just the form, no footer.
+  const isAuthPage = pathname === '/login' || pathname === '/register'
 
   useEffect(() => {
     // If the URL has a #section, scroll to it; otherwise go to the top.
@@ -29,7 +31,7 @@ export default function Layout() {
       <main className={`flex-1 ${isHome ? '' : 'pt-24'}`}>
         <Outlet />
       </main>
-      <Footer />
+      {!isAuthPage && <Footer />}
     </div>
   )
 }
