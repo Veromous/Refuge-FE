@@ -15,7 +15,7 @@ export interface ApiError extends Error {
 }
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
-  // Attach the auth token when present so signed-in donors get linked to their
+  // Attach the auth token when present so signed-in partners get linked to their
   // account; guests simply send no token.
   const token = localStorage.getItem('token')
 

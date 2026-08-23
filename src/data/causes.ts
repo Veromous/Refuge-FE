@@ -1,5 +1,5 @@
-// The funds a donor can direct a gift toward. The `id` values must match the
-// DonationCause enum in the backend (prisma/schema.prisma).
+// The funds a partner can direct a partnership toward. The `id` values must match
+// the PartnershipCause enum in the backend (prisma/schema.prisma).
 import { HandHeart, Cross, Church } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -9,7 +9,7 @@ export interface Cause {
   id: CauseId
   label: string
   Icon: LucideIcon
-  // Short line shown inside the donation selector.
+  // Short line shown inside the partnership selector.
   short: string
   // Fuller description used on the "What We Do" gospel section.
   description: string
@@ -42,5 +42,5 @@ export const causes: Cause[] = [
   },
 ]
 
-// The default fund when a donor does not pick one.
+// The default fund when a partner does not pick one.
 export const defaultCauseId: CauseId = 'GENERAL'

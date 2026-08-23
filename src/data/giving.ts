@@ -1,11 +1,11 @@
-// Direct-giving details for donors who prefer to send funds themselves
-// (crypto wallets and a Mobile Money number), shown on the Donate page.
+// Direct-giving details for partners who prefer to send funds themselves
+// (crypto wallets and a Mobile Money number), shown on the Partner page.
 //
 // >>> THESE ARE FAKE PLACEHOLDER VALUES — NOT REAL RECEIVING ADDRESSES. <<<
 // Replace them with your real wallet addresses and MoMo number, then set
 // `givingIsPlaceholder` to false to hide the "sample details" warning banner.
 
-// While true, the Donate page shows a notice that these details are not real.
+// While true, the Partner page shows a notice that these details are not real.
 export const givingIsPlaceholder = true
 
 export interface CryptoAddress {

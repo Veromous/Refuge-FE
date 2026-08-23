@@ -14,11 +14,11 @@ const faqs = [
     a: 'Our home base is Bonanjo, Douala, in the Littoral Region. Our work reaches across Wouri Division, with room to grow into other parts of the country.',
   },
   {
-    q: 'How can I donate?',
-    a: 'You will soon be able to give securely online by card or Mobile Money through our Donate page. We are putting the finishing touches on secure payments.',
+    q: 'How can I partner with you?',
+    a: 'You will soon be able to give securely online by card or Mobile Money through our Partner page. We are putting the finishing touches on secure payments.',
   },
   {
-    q: 'Is my donation used well?',
+    q: 'Is my partnership used well?',
     a: 'Yes. Gifts go directly toward our programs in education, agriculture and health. We are committed to transparency and good stewardship of every contribution.',
   },
   {

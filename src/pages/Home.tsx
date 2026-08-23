@@ -35,10 +35,10 @@ export default function Home() {
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <Link
-                to="/donate"
+                to="/partner"
                 className="rounded-full bg-warm-500 px-8 py-3 text-base font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg"
               >
-                Donate now
+                Partner with us
               </Link>
               <Link
                 to="/about"
@@ -121,10 +121,10 @@ export default function Home() {
             becomes hope in action.
           </p>
           <Link
-            to="/donate"
+            to="/partner"
             className="mt-8 inline-block rounded-full bg-warm-500 px-8 py-3 text-base font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg"
           >
-            Make a donation
+            Become a partner
           </Link>
         </div>
       </section>

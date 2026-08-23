@@ -19,7 +19,7 @@ const exploreLinks = [
 ]
 
 const supportLinks = [
-  { to: '/donate', label: 'Donate' },
+  { to: '/partner', label: 'Partner' },
   { to: '/about#faqs', label: 'FAQs' },
   { to: '/contact', label: 'Contact Us' },
 ]

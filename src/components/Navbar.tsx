@@ -124,10 +124,10 @@ export default function Navbar() {
             </Link>
           )}
           <Link
-            to="/donate"
+            to="/partner"
             className="rounded-full bg-warm-500 px-6 py-2.5 text-base font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg"
           >
-            Donate
+            Partner
           </Link>
         </div>
 
@@ -182,11 +182,11 @@ export default function Navbar() {
                 </Link>
               )}
               <Link
-                to="/donate"
+                to="/partner"
                 onClick={() => setOpen(false)}
                 className="rounded-full bg-warm-500 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg"
               >
-                Donate
+                Partner
               </Link>
             </div>
           </div>

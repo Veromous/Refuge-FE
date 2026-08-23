@@ -15,7 +15,7 @@ interface InitializeResponse {
   reference: string
 }
 
-export default function Donate() {
+export default function Partner() {
   const [amount, setAmount] = useState<number | ''>(5000)
   const [cause, setCause] = useState<CauseId>(defaultCauseId)
   const [name, setName] = useState('')
@@ -39,7 +39,7 @@ export default function Donate() {
 
     setLoading(true)
     try {
-      const res = await api.post<InitializeResponse>('/donations', {
+      const res = await api.post<InitializeResponse>('/partnerships', {
         amount,
         cause,
         name: name.trim(),
@@ -59,19 +59,19 @@ export default function Donate() {
     <>
       <PageHeader
         eyebrow="Give hope"
-        title="Make a Donation"
-        subtitle="Your generosity becomes someone’s refuge: a meal, a lesson, a harvest, a healing."
+        title="Become a Partner"
+        subtitle="Your partnership becomes someone’s refuge: a meal, a lesson, a harvest, a healing."
       />
 
       <section className="mx-auto max-w-2xl px-6 py-16">
-        {/* Online donation via NotchPay */}
+        {/* Online partnership via NotchPay */}
         <form
           onSubmit={handleSubmit}
           className="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm"
         >
           <h2 className="text-xl font-semibold text-slate-900">Direct your gift</h2>
           <p className="mt-1 text-sm text-slate-500">
-            Choose the work you would like your donation to support.
+            Choose the work you would like your partnership to support.
           </p>
           <div className="mt-5 grid gap-3">
             {causes.map((c) => {
@@ -186,7 +186,7 @@ export default function Donate() {
             className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-warm-500 px-8 py-3 font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:shadow-none"
           >
             {loading && <Loader2 className="h-5 w-5 animate-spin" />}
-            {loading ? 'Redirecting to secure checkout...' : 'Donate with Mobile Money'}
+            {loading ? 'Redirecting to secure checkout...' : 'Partner with Mobile Money'}
           </button>
           <p className="mt-4 text-center text-sm text-slate-500">
             You will be taken to a secure NotchPay page to complete your gift.
@@ -264,7 +264,7 @@ export default function Donate() {
           </div>
 
           <p className="mt-6 text-center text-sm text-slate-500">
-            For direct gifts, please email us so we can thank you and record your donation.
+            For direct gifts, please email us so we can thank you and record your partnership.
           </p>
         </div>
       </section>

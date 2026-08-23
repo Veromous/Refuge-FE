@@ -5,14 +5,14 @@ import { api } from '../lib/api'
 import { causes } from '../data/causes'
 import type { CauseId } from '../data/causes'
 
-interface Donation {
+interface Partnership {
   reference: string
   provider: string
   amount: number
   currency: string
   status: 'PENDING' | 'SUCCESSFUL' | 'FAILED'
   cause: CauseId
-  donorName: string
+  partnerName: string
   message: string | null
   createdAt: string
 }
@@ -23,35 +23,35 @@ function causeLabel(id: CauseId): string {
 
 interface VerifyResponse {
   success: boolean
-  donation: Donation
+  partnership: Partnership
 }
 
-// Where the provider redirects the donor after checkout. We read our own
+// Where the provider redirects the partner after checkout. We read our own
 // reference from the URL and actively confirm the outcome with the backend
 // (webhooks remain the source of truth, but this gives instant feedback).
-export default function DonateStatus() {
+export default function PartnerStatus() {
   const [params] = useSearchParams()
   const reference = params.get('ref')
 
   const [loading, setLoading] = useState(true)
-  const [donation, setDonation] = useState<Donation | null>(null)
+  const [partnership, setPartnership] = useState<Partnership | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!reference) {
-      setError('No donation reference was provided.')
+      setError('No partnership reference was provided.')
       setLoading(false)
       return
     }
 
     let cancelled = false
     api
-      .post<VerifyResponse>(`/donations/${encodeURIComponent(reference)}/verify`)
+      .post<VerifyResponse>(`/partnerships/${encodeURIComponent(reference)}/verify`)
       .then((res) => {
-        if (!cancelled) setDonation(res.donation)
+        if (!cancelled) setPartnership(res.partnership)
       })
       .catch((err) => {
-        if (!cancelled) setError(err instanceof Error ? err.message : 'Could not verify the donation.')
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Could not verify the partnership.')
       })
       .finally(() => {
         if (!cancelled) setLoading(false)
@@ -68,48 +68,48 @@ export default function DonateStatus() {
         {loading && (
           <div className="flex flex-col items-center">
             <Loader2 className="h-12 w-12 animate-spin text-hope-600" />
-            <p className="mt-4 text-slate-600">Confirming your donation...</p>
+            <p className="mt-4 text-slate-600">Confirming your partnership...</p>
           </div>
         )}
 
         {!loading && error && (
           <Result
             icon={<XCircle className="h-12 w-12 text-red-500" />}
-            title="We couldn’t confirm your donation"
+            title="We couldn’t confirm your partnership"
             body={error}
           />
         )}
 
-        {!loading && donation?.status === 'SUCCESSFUL' && (
+        {!loading && partnership?.status === 'SUCCESSFUL' && (
           <Result
             icon={<CheckCircle2 className="h-12 w-12 text-hope-600" />}
-            title="Thank you for your gift"
-            body={`Your donation of ${donation.amount.toLocaleString()} ${donation.currency} toward ${causeLabel(donation.cause)} was received. You are now someone’s refuge.`}
+            title="Thank you for your partnership"
+            body={`Your partnership of ${partnership.amount.toLocaleString()} ${partnership.currency} toward ${causeLabel(partnership.cause)} was received. You are now someone’s refuge.`}
           />
         )}
 
-        {!loading && donation?.status === 'PENDING' && (
+        {!loading && partnership?.status === 'PENDING' && (
           <Result
             icon={<Clock className="h-12 w-12 text-warm-500" />}
-            title="Your donation is being processed"
+            title="Your partnership is being processed"
             body="This can take a moment. We’ll confirm it as soon as your payment clears. You can safely close this page."
           />
         )}
 
-        {!loading && donation?.status === 'FAILED' && (
+        {!loading && partnership?.status === 'FAILED' && (
           <Result
             icon={<XCircle className="h-12 w-12 text-red-500" />}
-            title="Your donation didn’t go through"
+            title="Your partnership didn’t go through"
             body="No charge was completed. Please try again, and reach out if the problem continues."
           />
         )}
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
-            to="/donate"
+            to="/partner"
             className="rounded-full bg-warm-500 px-6 py-2.5 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg"
           >
-            Back to donate
+            Back to partner
           </Link>
           <Link
             to="/"

@@ -3,8 +3,8 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import About from './pages/About'
 import WhatWeDo from './pages/WhatWeDo'
-import Donate from './pages/Donate'
-import DonateStatus from './pages/DonateStatus'
+import Partner from './pages/Partner'
+import PartnerStatus from './pages/PartnerStatus'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -17,8 +17,8 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="what-we-do" element={<WhatWeDo />} />
-        <Route path="donate" element={<Donate />} />
-        <Route path="donate/status" element={<DonateStatus />} />
+        <Route path="partner" element={<Partner />} />
+        <Route path="partner/status" element={<PartnerStatus />} />
         <Route path="contact" element={<Contact />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

@@ -90,7 +90,7 @@ export default function WhatWeDo() {
         </p>
         <div className="mt-8 text-center">
           <Link
-            to="/donate"
+            to="/partner"
             className="inline-block rounded-full bg-hope-700 px-8 py-3 text-base font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-hope-800 hover:shadow-lg"
           >
             Give toward the Gospel
@@ -106,7 +106,7 @@ export default function WhatWeDo() {
           in need.
         </p>
         <Link
-          to="/donate"
+          to="/partner"
           className="mt-8 inline-block rounded-full bg-warm-500 px-8 py-3 text-base font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-warm-600 hover:shadow-lg"
         >
           Support our work
