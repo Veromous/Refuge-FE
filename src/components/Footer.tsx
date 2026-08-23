@@ -60,6 +60,16 @@ export default function Footer() {
               <p className="font-brand text-base font-semibold text-white">Refuge of Hope</p>
               <p>Bonanjo, Douala</p>
               <p>Littoral, Cameroon</p>
+              <p>
+                <a href={`mailto:${org.email}`} className="transition hover:text-white">
+                  {org.email}
+                </a>
+              </p>
+              <p>
+                <a href={`tel:${org.phone.replace(/\s+/g, '')}`} className="transition hover:text-white">
+                  {org.phone}
+                </a>
+              </p>
             </div>
 
             <div className="mt-6 flex items-center gap-3">

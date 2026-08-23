@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import HeroImage from '../components/HeroImage'
+import Testimonials from '../components/Testimonials'
 import { objectives, focusAreas, org } from '../data/content'
 
 export default function Home() {
@@ -111,6 +112,9 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials />
 
       {/* CTA */}
       <section className="bg-white">

@@ -73,6 +73,31 @@ export const org = {
   slogan: 'A disciple of Christ abounding in good deeds and acts of charity',
   sloganVerse: 'Acts 9:36',
   location: 'Bonanjo, Douala, Wouri Division, Cameroon',
+  email: 'refugeofhope101@outlook.com',
+  phone: '+237 672659398',
   foundedYear: 2021,
   jurisdiction: 'Wouri Division and beyond',
 }
+
+// Sample testimonials shown on the home page. Replace the quotes and names with
+// real, consented stories from the people the association has served.
+export const testimonials = [
+  {
+    quote:
+      'When I could no longer pay my school fees, Refuge of Hope stepped in. Today I am back in class and dreaming again.',
+    name: 'Grace M.',
+    role: 'Student, Douala',
+  },
+  {
+    quote:
+      'They taught our cooperative better farming methods and gave us seeds. Our last harvest fed our families and left enough to sell.',
+    name: 'Emmanuel T.',
+    role: 'Farmer, Wouri',
+  },
+  {
+    quote:
+      'During my illness the association covered my treatment and prayed with me. I felt seen, cared for, and truly loved.',
+    name: 'Rebecca N.',
+    role: 'Community member',
+  },
+]
