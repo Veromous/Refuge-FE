@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom'
-import { Menu, X, LogOut, ChevronDown } from 'lucide-react'
+import { Menu, X, LogOut, ChevronDown, ShieldCheck } from 'lucide-react'
 import Logo from './Logo'
 import { navLinks } from '../data/content'
 import { useAuth } from '../context/AuthContext'
@@ -106,6 +106,16 @@ export default function Navbar() {
                   role="menu"
                   className="absolute right-0 top-full mt-3 w-44 overflow-hidden rounded-xl border border-slate-100 bg-white py-1 shadow-lg"
                 >
+                  {user.role === 'ADMIN' && (
+                    <Link
+                      to="/admin/testimonials"
+                      role="menuitem"
+                      className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                    >
+                      <ShieldCheck className="h-4 w-4" />
+                      Testimonials
+                    </Link>
+                  )}
                   <button
                     type="button"
                     role="menuitem"
