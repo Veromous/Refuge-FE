@@ -7,6 +7,9 @@ export const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About Us' },
   { to: '/what-we-do', label: 'What We Do' },
+  { to: '/gallery', label: 'Gallery' },
+  // Events page is hidden for now. Uncomment to show it in the nav.
+  // { to: '/events', label: 'Events' },
   { to: '/contact', label: 'Contact Us' },
 ]
 

@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
 import FaqSection from '../components/FaqSection'
 import { leadership, org } from '../data/content'
+import { albums } from '../data/gallery'
 
 export default function About() {
   return (
@@ -27,6 +30,30 @@ export default function About() {
           {org.foundedYear} and based in {org.location}, we are a registered charity devoted to
           lifting up the vulnerable through practical, lasting help.
         </p>
+      </section>
+
+      {/* Photo highlights */}
+      <section className="mx-auto max-w-6xl px-6 pb-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {albums[0]?.photos.slice(0, 4).map((src) => (
+            <img
+              key={src}
+              src={`/gallery/${src}`}
+              alt=""
+              loading="lazy"
+              className="aspect-square w-full rounded-2xl object-cover shadow-sm ring-1 ring-slate-100"
+            />
+          ))}
+        </div>
+        <div className="mt-6 text-center">
+          <Link
+            to="/gallery"
+            className="inline-flex items-center gap-1.5 font-semibold text-hope-700 hover:text-hope-800"
+          >
+            See more in our gallery
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </section>
 
       {/* Vision & Mission */}

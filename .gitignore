@@ -17,6 +17,9 @@ dist-ssr
 .env.*.local
 # NOTE: .env.example is intentionally NOT ignored — it's the shareable template.
 
+# Local-only notes (kept off GitHub)
+HIDDEN-FEATURES.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
